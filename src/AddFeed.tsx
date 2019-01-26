@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useFeeds } from "./useFeeds";
 
-const AddFeed = () => {
-  const [feeds, addFeed] = useFeeds();
+
+type Props = {
+  addFeed: (feedUrl: string) => void,
+}
+const AddFeed = ({ addFeed }: Props) => {
   const [inputState, setInputState] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

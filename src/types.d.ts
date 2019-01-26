@@ -1,5 +1,5 @@
 import { Output } from "rss-parser";
 
-export type Feed = Output & {
+export type FeedType = Output & {
   id: number;
 };
