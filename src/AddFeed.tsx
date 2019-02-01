@@ -17,6 +17,7 @@ const AddFeed = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" value={inputState} onChange={handleInputChange} />
+      <input type="submit" value="Add feed" />
     </form>
   );
 };
