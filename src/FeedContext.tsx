@@ -1,8 +1,15 @@
-import React from 'react';
+import React from "react";
 import { FeedType } from "./types";
 
-const FeedContext = React.createContext<{feeds: FeedType[], addFeed: (url: string) => void}>({feeds: [], addFeed: () => {}});
+type FeedContextType = {
+  feeds: FeedType[];
+  addFeed: (url: string) => void;
+};
 
-export {
-  FeedContext
+const defaultValue = {
+  feeds: [],
+  addFeed: () => {}
 }
+const FeedContext = React.createContext<FeedContextType>(defaultValue);
+
+export { FeedContext };
