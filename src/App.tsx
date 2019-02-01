@@ -1,64 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Feeds from "./pages/Feeds";
 import FeedsHome from "./pages/FeedsHome";
 import Feed from "./pages/Feed";
 import FeedHome from "./pages/FeedHome";
-import { Router } from "@reach/router";
-import { FeedType } from "./types";
-import { Output } from "rss-parser";
-import { hashCode } from "./utils";
+import { Router, Link } from "@reach/router";
 
-const parseRss = async (rssUrl: string): Promise<Output> => {
-  const rssObj: Output = await fetch(
-    `/.netlify/functions/hello?rssUrl=${rssUrl}`
-    ).then(res => res.json());
-  return rssObj;
-};
-
-const loadFeeds = (): FeedType[] => {
-  const feeds = localStorage.getItem("feeds");
-  if (feeds !== null) {
-    return JSON.parse(feeds);
-  }
-  return [];
-};
-
-const storeFeeds = (feeds: FeedType[]) => {
-  localStorage.setItem("feeds", JSON.stringify(feeds));
-};
-
+import { FeedContext } from "./FeedContext";
+import { useFeeds } from "./useFeed";
 
 const App = () => {
-  const [feeds, setFeeds] = useState<FeedType[]>([]);
+  const [feeds, addFeed] = useFeeds();
 
-  const addFeed = (url: string) => {
-    parseRss(url).then(feed => {
-
-      const newFeed = {
-        id: hashCode("hello"),
-        ...feed
-      };
-
-      setFeeds([...feeds, newFeed]);
-      storeFeeds(feeds);
-    });
-  };
-
-  useEffect(() => {
-    const feeds = loadFeeds();
-    setFeeds(feeds);
-    addFeed("https://overreacted.io/rss.xml");
-  }, []);
+  // useEffect(() => {
+  //   addFeed("https://overreacted.io/rss.xml");
+  // }, [])
 
   return (
-    <Router>
-      <Feeds path="feeds">
-        <FeedsHome feeds={feeds} path="/" />
-        <Feed path=":id">
-          <FeedHome feeds={feeds} path="/" />
-        </Feed>
-      </Feeds>
-    </Router>
+    <FeedContext.Provider
+      value={{
+        feeds,
+        addFeed
+      }}
+    >
+    {/* temp nav */}
+      <div>
+        <Link to="/feeds">Feeds</Link>
+      </div>
+      <Router>
+        <Feeds path="feeds">
+          <FeedsHome path="/" />
+          <Feed path=":id">
+            <FeedHome path="/" />
+          </Feed>
+        </Feeds>
+      </Router>
+    </FeedContext.Provider>
   );
 };
 export default App;

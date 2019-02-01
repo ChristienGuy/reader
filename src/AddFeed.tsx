@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { FeedContext } from "./FeedContext";
 
-
-type Props = {
-  addFeed: (feedUrl: string) => void,
-}
-const AddFeed = ({ addFeed }: Props) => {
+const AddFeed = () => {
   const [inputState, setInputState] = useState("");
+  const { addFeed } = useContext(FeedContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputState(event.target.value);
