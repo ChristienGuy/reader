@@ -5,7 +5,7 @@ import { hashCode } from "./utils";
 
 const parseRss = async (rssUrl: string): Promise<Output> => {
   const rssObj: Output = await fetch(
-    `/.netlify/functions/hello?rssUrl=${rssUrl}`
+    `/.netlify/functions/parseRss?rssUrl=${rssUrl}`
   ).then(res => res.json());
   return rssObj;
 };
