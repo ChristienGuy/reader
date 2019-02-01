@@ -11,10 +11,6 @@ import { useFeeds } from "./useFeed";
 const App = () => {
   const [feeds, addFeed] = useFeeds();
 
-  // useEffect(() => {
-  //   addFeed("https://overreacted.io/rss.xml");
-  // }, [])
-
   return (
     <FeedContext.Provider
       value={{
