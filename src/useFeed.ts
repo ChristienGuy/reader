@@ -10,7 +10,7 @@ const parseRss = async (rssUrl: string): Promise<Output> => {
   return rssObj;
 };
 
-const loadFeeds = (): FeedType[] => {
+const getFeedsFromStorage = (): FeedType[] => {
   const feeds = localStorage.getItem("feeds");
   if (feeds !== null) {
     return JSON.parse(feeds);
@@ -43,8 +43,11 @@ export const useFeeds = (): useFeedsType => {
   };
 
   useEffect(() => {
-    const feeds = loadFeeds();
-    setFeeds(feeds);
+    setFeeds(getFeedsFromStorage());
+
+    window.addEventListener('storage', () => {
+      setFeeds(getFeedsFromStorage())
+    })
   }, []);
 
   return [feeds, addFeed];
