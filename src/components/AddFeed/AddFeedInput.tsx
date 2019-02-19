@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
-import { FeedContext } from "./FeedContext";
+import { FeedContext } from "../../FeedContext";
+import Input from "../Input";
 
-const AddFeed = () => {
+const AddFeedInput = () => {
   const [inputState, setInputState] = useState("");
   const { addFeed } = useContext(FeedContext);
 
@@ -16,10 +17,10 @@ const AddFeed = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={inputState} onChange={handleInputChange} />
+      <Input type="text" value={inputState} onChange={handleInputChange} />
       <input type="submit" value="Add feed" />
     </form>
   );
 };
 
-export default AddFeed;
+export { AddFeedInput as default };

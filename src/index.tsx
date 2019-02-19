@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
   *, *:before, *:after {
     box-sizing: inherit;
+    user-select: none;
   }
 `;
 

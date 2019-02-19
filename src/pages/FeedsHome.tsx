@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { RouteComponentProps, Link } from "@reach/router";
 import { FeedType } from "../types";
 import { FeedContext } from "../FeedContext";
-import AddFeed from "../AddFeed";
 
 const FeedList = ({ feeds }: { feeds: FeedType[] }) => {
   return (
@@ -22,7 +21,6 @@ const FeedsHome = ({  }: RouteComponentProps) => {
     <div>
       <h1>FeedsHome</h1>
       <p>Try: https://overreacted.io/rss.xml</p>
-      <AddFeed />
       <FeedList feeds={feeds} />
     </div>
   );

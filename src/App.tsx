@@ -7,6 +7,7 @@ import { Router, Link } from "@reach/router";
 
 import { FeedContext } from "./FeedContext";
 import { useFeeds } from "./useFeed";
+import AddFeedModal from "./components/AddFeed/AddFeedModal";
 
 const App = () => {
   const [feeds, addFeed] = useFeeds();
@@ -30,6 +31,7 @@ const App = () => {
           </Feed>
         </Feeds>
       </Router>
+      <AddFeedModal />
     </FeedContext.Provider>
   );
 };
